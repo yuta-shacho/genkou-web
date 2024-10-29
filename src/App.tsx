@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import {
   Box,
   Button,
@@ -9,15 +6,18 @@ import {
   CardContent,
   Container,
   Typography,
-} from "@mui/material";
+} from '@mui/material'
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
 
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
-        <Box sx={{ display: "flex", justifyContent: "center", gap: 16 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
           <a href="https://vite.dev" target="_blank">
             <Box
               component="img"
@@ -38,16 +38,22 @@ function App() {
         <Typography variant="h1">Vite + React</Typography>
         <Card>
           <CardContent>
-            <CardActions sx={{ display: "flex", justifyContent: "center" }}>
+            <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
               <Button
-                onClick={() => setCount((count) => count + 1)}
+                onClick={() => setCount(count => count + 1)}
                 variant="contained"
               >
-                count is {count}
+                count is
+                {' '}
+                {count}
               </Button>
             </CardActions>
             <Typography align="center">
-              Edit <code>src/App.tsx</code> and save to test HMR
+              Edit
+              {' '}
+              <code>src/App.tsx</code>
+              {' '}
+              and save to test HMR
             </Typography>
           </CardContent>
         </Card>
@@ -56,7 +62,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </Typography>
     </Container>
-  );
+  )
 }
 
-export default App;
+export default App
