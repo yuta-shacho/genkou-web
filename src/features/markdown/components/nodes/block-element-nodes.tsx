@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import type { FC } from 'react'
 import type { MarkdownNodeProps } from '../../types'
 import {
@@ -78,7 +79,13 @@ export const ListNode: FC<MarkdownNodeProps<'list'>> = ({ node }) => {
 export const ListItemNode: FC<MarkdownNodeProps<'listItem'>> = ({ node }) => {
   return (
     <li>
-      <NodesRenderer nodes={node.children} />
+      {
+        node.children.map((child, index) => {
+          if (child.type === 'paragraph')
+            return <NodesRenderer key={index} nodes={child.children} />
+          return <NodesRenderer key={index} nodes={[child]} />
+        })
+      }
     </li>
   )
 }
@@ -103,7 +110,6 @@ export const TableNode: FC<MarkdownNodeProps<'table'>> = ({ node }) => {
           <TableRow>
             {
               tableRowFirst.children.map((cell, index) => (
-                // eslint-disable-next-line react/no-array-index-key
                 <TableCell key={index}>
                   <NodesRenderer nodes={cell.children} />
                 </TableCell>
@@ -114,11 +120,9 @@ export const TableNode: FC<MarkdownNodeProps<'table'>> = ({ node }) => {
         <TableBody>
           {
             tableRowRemain.map((row, index) => (
-              // eslint-disable-next-line react/no-array-index-key
               <TableRow key={index}>
                 {
                   row.children.map((cell, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
                     <TableCell key={index}>
                       <NodesRenderer nodes={cell.children} />
                     </TableCell>
