@@ -11,12 +11,12 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     rawMarkdownText:
-      `# h1
-## h2
-### h3
-#### h4
-##### h5
-###### h6
+      `# 見出し1
+## 見出し2
+### 見出し3
+#### 見出し4
+##### 見出し5
+###### 見出し6
 
 通常
 *斜体*
@@ -32,7 +32,7 @@ export const Primary: Story = {
 
 [^1]: 脚注の内容
 
-[![React kawaii logo](https://raw.githubusercontent.com/SAWARATSUKI/KawaiiLogos/refs/heads/main/React/React.png)](https://github.com/SAWARATSUKI/KawaiiLogos/blob/main/React/React.png)
+![画像](https://via.placeholder.com/1920x1080)
 
 > 引用された文章
 

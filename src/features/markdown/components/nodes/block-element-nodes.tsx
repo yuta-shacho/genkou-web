@@ -3,6 +3,8 @@ import type { FC } from 'react'
 import type { MarkdownNodeProps } from '../../types'
 import {
   Box,
+  Paper,
+  styled,
   Table,
   TableBody,
   TableCell,
@@ -11,30 +13,20 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
+import { grey } from '@mui/material/colors'
 import { NodesRenderer } from '../nodes-renderer'
 
 export const HeadingNode: FC<MarkdownNodeProps<'heading'>> = ({ node }) => {
-  const heading = () => {
-    const depth = node.depth
-    switch (depth) {
-      case 1:
-        return 'h1'
-      case 2:
-        return 'h2'
-      case 3:
-        return 'h3'
-      case 4:
-        return 'h4'
-      case 5:
-        return 'h5'
-      case 6:
-        return 'h6'
-      default:
-        return depth satisfies never
-    }
-  }
+  const headings = {
+    1: 'h1',
+    2: 'h2',
+    3: 'h3',
+    4: 'h4',
+    5: 'h5',
+    6: 'h6',
+  } as const
   return (
-    <Typography component={heading()}>
+    <Typography variant={headings[node.depth]}>
       <NodesRenderer nodes={node.children} />
     </Typography>
   )
@@ -46,15 +38,30 @@ export const ImageNode: FC<MarkdownNodeProps<'image'>> = ({ node }) => {
       component="img"
       alt={node.alt ?? ''}
       src={node.url}
+      loading="lazy"
+      sx={{
+        maxWidth: '100%',
+        borderRadius: '0.6rem',
+      }}
     />
   )
 }
 
+const StyledBlockQuote = styled('blockquote')({
+  marginLeft: 0,
+  margin: 0,
+  paddingLeft: '1rem',
+  color: grey[600],
+  borderLeftWidth: '3px',
+  borderLeftColor: grey[500],
+  borderLeftStyle: 'solid',
+})
+
 export const BlockquoteNode: FC<MarkdownNodeProps<'blockquote'>> = ({ node }) => {
   return (
-    <blockquote>
+    <StyledBlockQuote>
       <NodesRenderer nodes={node.children} />
-    </blockquote>
+    </StyledBlockQuote>
   )
 }
 
@@ -62,23 +69,35 @@ export const ThematicBreak: FC<MarkdownNodeProps<'thematicBreak'>> = () => {
   return <hr />
 }
 
+const MarkdownList = styled('ul')({
+  paddingLeft: '1.6em',
+})
+
+const MarkdownOrderedList = styled('ol')({
+  paddingLeft: '1.6em',
+})
+
 export const ListNode: FC<MarkdownNodeProps<'list'>> = ({ node }) => {
   return node.ordered
     ? (
-        <ol>
+        <MarkdownOrderedList>
           <NodesRenderer nodes={node.children} />
-        </ol>
+        </MarkdownOrderedList>
       )
     : (
-        <ul>
+        <MarkdownList>
           <NodesRenderer nodes={node.children} />
-        </ul>
+        </MarkdownList>
       )
 }
 
+const MarkdownListItem = styled('li')({
+  marginTop: '0.5em',
+})
+
 export const ListItemNode: FC<MarkdownNodeProps<'listItem'>> = ({ node }) => {
   return (
-    <li>
+    <MarkdownListItem>
       {
         node.children.map((child, index) => {
           if (child.type === 'paragraph')
@@ -86,15 +105,19 @@ export const ListItemNode: FC<MarkdownNodeProps<'listItem'>> = ({ node }) => {
           return <NodesRenderer key={index} nodes={[child]} />
         })
       }
-    </li>
+    </MarkdownListItem>
   )
 }
 
+const StyledPre = styled('pre')({
+  marginTop: '1.6rem',
+})
+
 export const CodeNode: FC<MarkdownNodeProps<'code'>> = ({ node }) => {
   return (
-    <pre>
+    <StyledPre>
       {node.value}
-    </pre>
+    </StyledPre>
   )
 }
 
@@ -104,13 +127,13 @@ export const TableNode: FC<MarkdownNodeProps<'table'>> = ({ node }) => {
   if (!tableRowFirst)
     return null
   return (
-    <TableContainer>
+    <TableContainer component={Paper} sx={{ marginTop: '1.6rem' }}>
       <Table>
         <TableHead>
           <TableRow>
             {
               tableRowFirst.children.map((cell, index) => (
-                <TableCell key={index}>
+                <TableCell key={index} sx={{ fontWeight: 'bold' }}>
                   <NodesRenderer nodes={cell.children} />
                 </TableCell>
               ))

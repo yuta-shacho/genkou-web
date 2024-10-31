@@ -1,3 +1,4 @@
+import { Container } from '@mui/material'
 import { type FC, useEffect, useState } from 'react'
 import { parseMarkdown } from '../../libs/parser'
 import { NodesRenderer } from '../nodes-renderer'
@@ -17,5 +18,9 @@ export const Markdown: FC<MarkdownProps> = ({ rawMarkdownText }) => {
   }, [rawMarkdownText])
   if (!root)
     return <div></div>
-  return <NodesRenderer nodes={root.children} />
+  return (
+    <Container maxWidth="md">
+      <NodesRenderer nodes={root.children} />
+    </Container>
+  )
 }
