@@ -23,7 +23,7 @@ function Editor() {
         name: 'title',
         groupName: 'title',
         buttonProps: { 'aria-label': 'Insert title' },
-      }
+      },
     ),
   ]
   return (
