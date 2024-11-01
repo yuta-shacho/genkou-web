@@ -1,7 +1,9 @@
-import { useState } from 'react';
-import MDEditor, { commands } from '@uiw/react-md-editor';
+import MDEditor, { commands } from '@uiw/react-md-editor'
+import { useState } from 'react'
+
+
 const Editor = () => {
-  const [markdown, setMarkdown] = useState<string | undefined>('# h1');
+  const [markdown, setMarkdown] = useState<string | undefined>('# h1')
 
   const customCommands = [
     commands.bold,
@@ -24,7 +26,7 @@ const Editor = () => {
         buttonProps: { 'aria-label': 'Insert title' },
       }
     ),
-  ];
+  ]
   return (
     <div className='full-screen-container' data-color-mode='dark'>
       <MDEditor
@@ -32,7 +34,7 @@ const Editor = () => {
         height='100%'
         fullscreen
         onChange={(val) => {
-          setMarkdown(val!);
+          setMarkdown(val!)
         }}
         enableScroll
         commands={customCommands}
@@ -40,7 +42,7 @@ const Editor = () => {
         preview='edit'
       />
     </div>
-  );
-};
+  )
+}
 
-export default Editor;
+export default Editor
