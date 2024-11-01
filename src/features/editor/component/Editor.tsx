@@ -1,8 +1,7 @@
 import MDEditor, { commands } from '@uiw/react-md-editor'
 import { useState } from 'react'
 
-
-const Editor = () => {
+function Editor() {
   const [markdown, setMarkdown] = useState<string | undefined>('# h1')
 
   const customCommands = [
@@ -28,10 +27,10 @@ const Editor = () => {
     ),
   ]
   return (
-    <div className='full-screen-container' data-color-mode='dark'>
+    <div className="full-screen-container" data-color-mode="dark">
       <MDEditor
         value={markdown}
-        height='100%'
+        height="100%"
         fullscreen
         onChange={(val) => {
           setMarkdown(val!)
@@ -39,7 +38,7 @@ const Editor = () => {
         enableScroll
         commands={customCommands}
         extraCommands={[commands.codeEdit, commands.codePreview]}
-        preview='edit'
+        preview="edit"
       />
     </div>
   )
