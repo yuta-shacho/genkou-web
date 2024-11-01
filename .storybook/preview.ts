@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react'
-import { CssBaseline, type Theme, ThemeProvider } from '@mui/material'
+import { CssBaseline, ThemeProvider } from '@mui/material'
 import { withThemeFromJSXProvider } from '@storybook/addon-themes'
 import { initTheme } from '../src/shared/styles/theme'
 
