@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react";
-import Editor from "./Editor";
+import { Meta } from '@storybook/react';
+import Editor from './Editor';
 
 const meta: Meta<typeof Editor> = {
   component: Editor,
-  title: "Editor",
+  title: 'Editor',
 };
 
 export default meta;
