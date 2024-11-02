@@ -29,7 +29,7 @@ function TimerTitle() {
       if (id)
         clearInterval(id)
     }
-  }, [isActive, totalSeconds,intervalId])
+  }, [isActive, totalSeconds, intervalId])
 
   const toggleActive = () => {
     setIsActive(!isActive)
