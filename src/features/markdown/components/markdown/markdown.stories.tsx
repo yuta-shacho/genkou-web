@@ -10,8 +10,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    rawMarkdownText:
-      `# 見出し1
+    markdown: `# 見出し1
 ## 見出し2
 ### 見出し3
 #### 見出し4
