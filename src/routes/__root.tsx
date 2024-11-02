@@ -1,4 +1,4 @@
-import { CssBaseline } from '@mui/material'
+import { CssBaseline, styled } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { createRootRoute, Outlet } from '@tanstack/react-router'
@@ -23,13 +23,20 @@ const TanStackQueryDevtools = isProduction
 const theme = initTheme({ dark: true })
 const queryClient = new QueryClient()
 
+const RootLayout = styled('div')({
+  height: '100vh',
+  overflow: 'auto',
+})
+
 export const Route = createRootRoute({
   component: () => (
     <>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <CssBaseline />
-          <Outlet />
+          <RootLayout>
+            <Outlet />
+          </RootLayout>
           <TanStackQueryDevtools />
         </QueryClientProvider>
       </ThemeProvider>

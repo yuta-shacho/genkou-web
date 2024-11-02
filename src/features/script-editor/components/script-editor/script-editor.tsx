@@ -2,16 +2,15 @@ import type { Mode } from '@/features/script-editor/types'
 import { ModeSelector } from '@/features/script-editor/components/mode-selector'
 import { Save } from '@mui/icons-material'
 import { Box, Button, Grid2 as Grid, Toolbar } from '@mui/material'
-import { type FC, lazy, type ReactNode, Suspense, useState } from 'react'
+import { type FC, lazy, Suspense, useState } from 'react'
 
 const Markdown = lazy(() => import('@/features/markdown/components/markdown').then(module => ({ default: module.Markdown })))
 const Editor = lazy(() => import('@/features/editor/component/Editor'))
 
 export interface ScriptEditorProps {
-  children: ReactNode
 }
 
-export const ScriptEditor: FC<ScriptEditorProps> = ({ children }) => {
+export const ScriptEditor: FC<ScriptEditorProps> = () => {
   const [markdown, setMarkdown] = useState<string>('')
   const [mode, setMode] = useState<Mode>('edit')
   return (
@@ -52,6 +51,7 @@ export const ScriptEditor: FC<ScriptEditorProps> = ({ children }) => {
             switch (mode) {
               case 'edit':
                 return <Editor markdown={markdown} setMarkdown={setMarkdown} />
+              // TODO: タイマー設定モードの実装
               case 'timer':
                 return <Markdown markdown={markdown} />
               case 'preview':
@@ -62,7 +62,6 @@ export const ScriptEditor: FC<ScriptEditorProps> = ({ children }) => {
           })()}
         </Suspense>
       </Box>
-      {children}
     </Box>
   )
 }
