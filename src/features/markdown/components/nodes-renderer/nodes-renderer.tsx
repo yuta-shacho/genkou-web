@@ -93,6 +93,8 @@ export const NodesRenderer: FC<NodesRendererProps> = ({ nodes }) => {
 
       case 'tableRow':
       case 'tableCell':
+      case 'mdxJsxFlowElement':
+      case 'mdxJsxTextElement':
       {
         const start = node.position?.start
         const end = node.position?.end
