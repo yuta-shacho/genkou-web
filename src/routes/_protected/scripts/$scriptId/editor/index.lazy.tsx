@@ -1,5 +1,5 @@
 import { ScriptEditor } from '@/features/script-editor/components/script-editor'
-import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
+import { createLazyFileRoute } from '@tanstack/react-router'
 
 export const Route = createLazyFileRoute(
   '/_protected/scripts/$scriptId/editor/',
@@ -8,10 +8,7 @@ export const Route = createLazyFileRoute(
 })
 
 function Page() {
-  const { scriptId } = Route.useParams()
   return (
-    <ScriptEditor>
-      <Outlet />
-    </ScriptEditor>
+    <ScriptEditor />
   )
 }
