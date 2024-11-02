@@ -7,6 +7,7 @@ export default antfu(
     ignores: [
       'dist',
       'src/routeTree.gen.ts',
+      'src/generated',
     ],
     formatters: true,
     react: true,

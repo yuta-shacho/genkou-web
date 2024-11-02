@@ -11,7 +11,8 @@
     "format": "eslint . --fix",
     "typecheck": "tsc -b",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "gen": "orval"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -54,6 +55,7 @@
     "eslint-plugin-react-refresh": "^0.4.13",
     "eslint-plugin-storybook": "^0.10.1",
     "globals": "^15.11.0",
+    "orval": "^7.2.0",
     "storybook": "^8.3.6",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.10.0",
