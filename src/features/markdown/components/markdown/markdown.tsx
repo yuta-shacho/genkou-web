@@ -4,22 +4,22 @@ import { parseMarkdown } from '../../libs/parser'
 import { NodesRenderer } from '../nodes-renderer'
 
 export interface MarkdownProps {
-  rawMarkdownText: string
+  markdown: string
 }
 
 // TODO: useとSuspenseを使った実装に切り替える
-export const Markdown: FC<MarkdownProps> = ({ rawMarkdownText }) => {
+export const Markdown: FC<MarkdownProps> = ({ markdown }) => {
   const [root, setRoot] = useState<Awaited<ReturnType<typeof parseMarkdown>>>()
   useEffect(() => {
     (async () => {
-      const parsed = await parseMarkdown(rawMarkdownText)
+      const parsed = await parseMarkdown(markdown)
       setRoot(parsed)
     })()
-  }, [rawMarkdownText])
+  }, [markdown])
   if (!root)
     return <div></div>
   return (
-    <Container maxWidth="md">
+    <Container maxWidth={false} sx={{ maxWidth: '48rem' }}>
       <NodesRenderer nodes={root.children} />
     </Container>
   )

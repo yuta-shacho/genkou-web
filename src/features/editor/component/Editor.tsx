@@ -1,9 +1,12 @@
+import type { FC } from 'react'
 import MDEditor, { commands } from '@uiw/react-md-editor'
-import { useState } from 'react'
 
-function Editor() {
-  const [markdown, setMarkdown] = useState<string | undefined>('# h1')
+export interface EditorProps {
+  markdown: string
+  setMarkdown: (markdown: string) => void
+}
 
+const Editor: FC<EditorProps> = ({ markdown, setMarkdown }) => {
   const customCommands = [
     commands.bold,
     commands.italic,
@@ -27,20 +30,21 @@ function Editor() {
     ),
   ]
   return (
-    <div className="full-screen-container" data-color-mode="dark">
-      <MDEditor
-        value={markdown}
-        height="100%"
-        fullscreen
-        onChange={(val) => {
-          setMarkdown(val!)
-        }}
-        enableScroll
-        commands={customCommands}
-        extraCommands={[commands.codeEdit, commands.codePreview]}
-        preview="edit"
-      />
-    </div>
+    <MDEditor
+      value={markdown}
+      height="100%"
+      fullscreen
+      onChange={(val) => {
+        setMarkdown(val!)
+      }}
+      enableScroll
+      commands={customCommands}
+      extraCommands={[]}
+      preview="edit"
+      style={{
+        position: 'initial',
+      }}
+    />
   )
 }
 

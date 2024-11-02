@@ -19,7 +19,6 @@ import { Route as ProtectedImport } from './routes/_protected'
 // Create Virtual Routes
 
 const ProtectedIndexLazyImport = createFileRoute('/_protected/')()
-const ProtectedScriptsLazyImport = createFileRoute('/_protected/scripts')()
 const PublicLoginIndexLazyImport = createFileRoute('/_public/login/')()
 const ProtectedSettingsIndexLazyImport = createFileRoute(
   '/_protected/settings/',
@@ -27,8 +26,8 @@ const ProtectedSettingsIndexLazyImport = createFileRoute(
 const ProtectedScriptsScriptIdIndexLazyImport = createFileRoute(
   '/_protected/scripts/$scriptId/',
 )()
-const ProtectedScriptsScriptIdEditIndexLazyImport = createFileRoute(
-  '/_protected/scripts/$scriptId/edit/',
+const ProtectedScriptsScriptIdEditorIndexLazyImport = createFileRoute(
+  '/_protected/scripts/$scriptId/editor/',
 )()
 
 // Create/Update Routes
@@ -51,14 +50,6 @@ const ProtectedIndexLazyRoute = ProtectedIndexLazyImport.update({
   import('./routes/_protected/index.lazy').then((d) => d.Route),
 )
 
-const ProtectedScriptsLazyRoute = ProtectedScriptsLazyImport.update({
-  id: '/scripts',
-  path: '/scripts',
-  getParentRoute: () => ProtectedRoute,
-} as any).lazy(() =>
-  import('./routes/_protected/scripts.lazy').then((d) => d.Route),
-)
-
 const PublicLoginIndexLazyRoute = PublicLoginIndexLazyImport.update({
   id: '/login/',
   path: '/login/',
@@ -79,22 +70,22 @@ const ProtectedSettingsIndexLazyRoute = ProtectedSettingsIndexLazyImport.update(
 
 const ProtectedScriptsScriptIdIndexLazyRoute =
   ProtectedScriptsScriptIdIndexLazyImport.update({
-    id: '/$scriptId/',
-    path: '/$scriptId/',
-    getParentRoute: () => ProtectedScriptsLazyRoute,
+    id: '/scripts/$scriptId/',
+    path: '/scripts/$scriptId/',
+    getParentRoute: () => ProtectedRoute,
   } as any).lazy(() =>
     import('./routes/_protected/scripts/$scriptId/index.lazy').then(
       (d) => d.Route,
     ),
   )
 
-const ProtectedScriptsScriptIdEditIndexLazyRoute =
-  ProtectedScriptsScriptIdEditIndexLazyImport.update({
-    id: '/$scriptId/edit/',
-    path: '/$scriptId/edit/',
-    getParentRoute: () => ProtectedScriptsLazyRoute,
+const ProtectedScriptsScriptIdEditorIndexLazyRoute =
+  ProtectedScriptsScriptIdEditorIndexLazyImport.update({
+    id: '/scripts/$scriptId/editor/',
+    path: '/scripts/$scriptId/editor/',
+    getParentRoute: () => ProtectedRoute,
   } as any).lazy(() =>
-    import('./routes/_protected/scripts/$scriptId/edit/index.lazy').then(
+    import('./routes/_protected/scripts/$scriptId/editor/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -116,13 +107,6 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof PublicImport
       parentRoute: typeof rootRoute
-    }
-    '/_protected/scripts': {
-      id: '/_protected/scripts'
-      path: '/scripts'
-      fullPath: '/scripts'
-      preLoaderRoute: typeof ProtectedScriptsLazyImport
-      parentRoute: typeof ProtectedImport
     }
     '/_protected/': {
       id: '/_protected/'
@@ -147,48 +131,37 @@ declare module '@tanstack/react-router' {
     }
     '/_protected/scripts/$scriptId/': {
       id: '/_protected/scripts/$scriptId/'
-      path: '/$scriptId'
+      path: '/scripts/$scriptId'
       fullPath: '/scripts/$scriptId'
       preLoaderRoute: typeof ProtectedScriptsScriptIdIndexLazyImport
-      parentRoute: typeof ProtectedScriptsLazyImport
+      parentRoute: typeof ProtectedImport
     }
-    '/_protected/scripts/$scriptId/edit/': {
-      id: '/_protected/scripts/$scriptId/edit/'
-      path: '/$scriptId/edit'
-      fullPath: '/scripts/$scriptId/edit'
-      preLoaderRoute: typeof ProtectedScriptsScriptIdEditIndexLazyImport
-      parentRoute: typeof ProtectedScriptsLazyImport
+    '/_protected/scripts/$scriptId/editor/': {
+      id: '/_protected/scripts/$scriptId/editor/'
+      path: '/scripts/$scriptId/editor'
+      fullPath: '/scripts/$scriptId/editor'
+      preLoaderRoute: typeof ProtectedScriptsScriptIdEditorIndexLazyImport
+      parentRoute: typeof ProtectedImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface ProtectedScriptsLazyRouteChildren {
-  ProtectedScriptsScriptIdIndexLazyRoute: typeof ProtectedScriptsScriptIdIndexLazyRoute
-  ProtectedScriptsScriptIdEditIndexLazyRoute: typeof ProtectedScriptsScriptIdEditIndexLazyRoute
-}
-
-const ProtectedScriptsLazyRouteChildren: ProtectedScriptsLazyRouteChildren = {
-  ProtectedScriptsScriptIdIndexLazyRoute:
-    ProtectedScriptsScriptIdIndexLazyRoute,
-  ProtectedScriptsScriptIdEditIndexLazyRoute:
-    ProtectedScriptsScriptIdEditIndexLazyRoute,
-}
-
-const ProtectedScriptsLazyRouteWithChildren =
-  ProtectedScriptsLazyRoute._addFileChildren(ProtectedScriptsLazyRouteChildren)
-
 interface ProtectedRouteChildren {
-  ProtectedScriptsLazyRoute: typeof ProtectedScriptsLazyRouteWithChildren
   ProtectedIndexLazyRoute: typeof ProtectedIndexLazyRoute
   ProtectedSettingsIndexLazyRoute: typeof ProtectedSettingsIndexLazyRoute
+  ProtectedScriptsScriptIdIndexLazyRoute: typeof ProtectedScriptsScriptIdIndexLazyRoute
+  ProtectedScriptsScriptIdEditorIndexLazyRoute: typeof ProtectedScriptsScriptIdEditorIndexLazyRoute
 }
 
 const ProtectedRouteChildren: ProtectedRouteChildren = {
-  ProtectedScriptsLazyRoute: ProtectedScriptsLazyRouteWithChildren,
   ProtectedIndexLazyRoute: ProtectedIndexLazyRoute,
   ProtectedSettingsIndexLazyRoute: ProtectedSettingsIndexLazyRoute,
+  ProtectedScriptsScriptIdIndexLazyRoute:
+    ProtectedScriptsScriptIdIndexLazyRoute,
+  ProtectedScriptsScriptIdEditorIndexLazyRoute:
+    ProtectedScriptsScriptIdEditorIndexLazyRoute,
 }
 
 const ProtectedRouteWithChildren = ProtectedRoute._addFileChildren(
@@ -208,65 +181,59 @@ const PublicRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof PublicRouteWithChildren
-  '/scripts': typeof ProtectedScriptsLazyRouteWithChildren
   '/': typeof ProtectedIndexLazyRoute
   '/settings': typeof ProtectedSettingsIndexLazyRoute
   '/login': typeof PublicLoginIndexLazyRoute
   '/scripts/$scriptId': typeof ProtectedScriptsScriptIdIndexLazyRoute
-  '/scripts/$scriptId/edit': typeof ProtectedScriptsScriptIdEditIndexLazyRoute
+  '/scripts/$scriptId/editor': typeof ProtectedScriptsScriptIdEditorIndexLazyRoute
 }
 
 export interface FileRoutesByTo {
   '': typeof PublicRouteWithChildren
-  '/scripts': typeof ProtectedScriptsLazyRouteWithChildren
   '/': typeof ProtectedIndexLazyRoute
   '/settings': typeof ProtectedSettingsIndexLazyRoute
   '/login': typeof PublicLoginIndexLazyRoute
   '/scripts/$scriptId': typeof ProtectedScriptsScriptIdIndexLazyRoute
-  '/scripts/$scriptId/edit': typeof ProtectedScriptsScriptIdEditIndexLazyRoute
+  '/scripts/$scriptId/editor': typeof ProtectedScriptsScriptIdEditorIndexLazyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_protected': typeof ProtectedRouteWithChildren
   '/_public': typeof PublicRouteWithChildren
-  '/_protected/scripts': typeof ProtectedScriptsLazyRouteWithChildren
   '/_protected/': typeof ProtectedIndexLazyRoute
   '/_protected/settings/': typeof ProtectedSettingsIndexLazyRoute
   '/_public/login/': typeof PublicLoginIndexLazyRoute
   '/_protected/scripts/$scriptId/': typeof ProtectedScriptsScriptIdIndexLazyRoute
-  '/_protected/scripts/$scriptId/edit/': typeof ProtectedScriptsScriptIdEditIndexLazyRoute
+  '/_protected/scripts/$scriptId/editor/': typeof ProtectedScriptsScriptIdEditorIndexLazyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
-    | '/scripts'
     | '/'
     | '/settings'
     | '/login'
     | '/scripts/$scriptId'
-    | '/scripts/$scriptId/edit'
+    | '/scripts/$scriptId/editor'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
-    | '/scripts'
     | '/'
     | '/settings'
     | '/login'
     | '/scripts/$scriptId'
-    | '/scripts/$scriptId/edit'
+    | '/scripts/$scriptId/editor'
   id:
     | '__root__'
     | '/_protected'
     | '/_public'
-    | '/_protected/scripts'
     | '/_protected/'
     | '/_protected/settings/'
     | '/_public/login/'
     | '/_protected/scripts/$scriptId/'
-    | '/_protected/scripts/$scriptId/edit/'
+    | '/_protected/scripts/$scriptId/editor/'
   fileRoutesById: FileRoutesById
 }
 
@@ -297,23 +264,16 @@ export const routeTree = rootRoute
     "/_protected": {
       "filePath": "_protected.tsx",
       "children": [
-        "/_protected/scripts",
         "/_protected/",
-        "/_protected/settings/"
+        "/_protected/settings/",
+        "/_protected/scripts/$scriptId/",
+        "/_protected/scripts/$scriptId/editor/"
       ]
     },
     "/_public": {
       "filePath": "_public.tsx",
       "children": [
         "/_public/login/"
-      ]
-    },
-    "/_protected/scripts": {
-      "filePath": "_protected/scripts.lazy.tsx",
-      "parent": "/_protected",
-      "children": [
-        "/_protected/scripts/$scriptId/",
-        "/_protected/scripts/$scriptId/edit/"
       ]
     },
     "/_protected/": {
@@ -330,11 +290,11 @@ export const routeTree = rootRoute
     },
     "/_protected/scripts/$scriptId/": {
       "filePath": "_protected/scripts/$scriptId/index.lazy.tsx",
-      "parent": "/_protected/scripts"
+      "parent": "/_protected"
     },
-    "/_protected/scripts/$scriptId/edit/": {
-      "filePath": "_protected/scripts/$scriptId/edit/index.lazy.tsx",
-      "parent": "/_protected/scripts"
+    "/_protected/scripts/$scriptId/editor/": {
+      "filePath": "_protected/scripts/$scriptId/editor/index.lazy.tsx",
+      "parent": "/_protected"
     }
   }
 }

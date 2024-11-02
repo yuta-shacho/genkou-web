@@ -4,10 +4,8 @@ export function initTheme({ dark }: { dark: boolean }) {
   return createTheme({
     cssVariables: true,
     colorSchemes: { dark },
-    palette: {
-
-    },
     typography: {
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif, "Segoe UI Emoji"',
       h1: {
         fontSize: '2rem',
         fontWeight: 'bold',
