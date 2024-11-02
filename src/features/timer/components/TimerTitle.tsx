@@ -29,7 +29,7 @@ function TimerTitle() {
       if (id)
         clearInterval(id)
     }
-  }, [isActive, totalSeconds])
+  }, [isActive, totalSeconds,intervalId])
 
   const toggleActive = () => {
     setIsActive(!isActive)
@@ -37,7 +37,7 @@ function TimerTitle() {
 
   const handleStart = () => {
     const totalSec = Number.parseInt(minutes) * 60 + Number.parseInt(seconds)
-    if (!isNaN(totalSec) && totalSec >= 0) {
+    if (!Number.isNaN(totalSec) && totalSec >= 0) {
       setTotalSeconds(totalSec)
       setIsActive(true)
       setErrorMessage(null)
