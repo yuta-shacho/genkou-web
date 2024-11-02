@@ -1,15 +1,18 @@
-import { CssBaseline } from '@mui/material'
-import { ThemeProvider } from '@mui/material/styles'
+import { createRouter, RouterProvider } from '@tanstack/react-router'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import { initTheme } from './shared/styles/theme'
+import { routeTree } from './routeTree.gen.ts'
+
+const router = createRouter({ routeTree })
+
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={initTheme({ dark: true })}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <RouterProvider router={router} />
   </StrictMode>,
 )

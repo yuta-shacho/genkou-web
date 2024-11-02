@@ -3,7 +3,10 @@ import storybook from 'eslint-plugin-storybook'
 
 export default antfu(
   {
-    ignores: ['dist'],
+    ignores: [
+      'dist',
+      'src/routeTree.gen.ts',
+    ],
     formatters: true,
     react: true,
     markdown: false,
