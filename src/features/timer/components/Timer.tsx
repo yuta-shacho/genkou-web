@@ -1,10 +1,9 @@
-import TimerTitle from "./TimerTitle"
+import TimerTitle from './TimerTitle'
 
-
-const Timer = () => {
+function Timer() {
   return (
     <div>
-    <TimerTitle/>
+      <TimerTitle />
     </div>
   )
 }
