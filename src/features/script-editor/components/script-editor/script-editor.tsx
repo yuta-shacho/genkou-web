@@ -1,5 +1,6 @@
 import type { Mode } from '@/features/script-editor/types'
 import { ModeSelector } from '@/features/script-editor/components/mode-selector'
+import { EditableText } from '@/shared/components/editable-text'
 import { Save } from '@mui/icons-material'
 import { Box, Button, Grid2 as Grid, Toolbar } from '@mui/material'
 import { type FC, lazy, Suspense, useState } from 'react'
@@ -33,9 +34,9 @@ export const ScriptEditor: FC<ScriptEditorProps> = () => {
             <ModeSelector mode={mode} onSelect={mode => setMode(mode)} />
           </Grid>
           <Grid container size="grow" sx={{ placeContent: 'center' }}>
-            <div>
-              TITLE
-            </div>
+            <Box width="100%" maxWidth="80%">
+              <EditableText initial="TITLE" save={() => { }} />
+            </Box>
           </Grid>
           <Grid>
             <Button variant="contained" sx={{ display: 'flex', gap: 0.5 }}>
