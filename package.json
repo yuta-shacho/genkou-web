@@ -18,8 +18,12 @@
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.1.5",
     "@uiw/react-md-editor": "^4.0.4",
+    "mdast": "^2.3.2",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "remark": "^15.0.1",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.8.0",
@@ -30,6 +34,7 @@
     "@storybook/addon-interactions": "^8.3.6",
     "@storybook/addon-links": "^8.3.6",
     "@storybook/addon-onboarding": "^8.3.6",
+    "@storybook/addon-themes": "^8.3.6",
     "@storybook/blocks": "^8.3.6",
     "@storybook/react": "^8.3.6",
     "@storybook/react-vite": "^8.3.6",
