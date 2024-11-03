@@ -5,8 +5,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './getScriptsScriptsGetParams';
 export * from './hTTPValidationError';
-export * from './readScriptsScriptsGetParams';
 export * from './scriptCreate';
 export * from './scriptCreateTimer';
 export * from './scriptPublic';

@@ -21,8 +21,8 @@ import type {
   UseQueryResult
 } from '@tanstack/react-query'
 import type {
+  GetScriptsScriptsGetParams,
   HTTPValidationError,
-  ReadScriptsScriptsGetParams,
   ScriptCreate,
   ScriptPublic,
   ScriptUpdate,
@@ -108,14 +108,14 @@ export const useCreateScriptScriptsPost = <TError = HTTPValidationError,
     }
     
 /**
- * @summary Read Scripts
+ * @summary Get Scripts
  */
-export type readScriptsScriptsGetResponse = {
+export type getScriptsScriptsGetResponse = {
   data: ScriptPublic[];
   status: number;
 }
 
-export const getReadScriptsScriptsGetUrl = (params?: ReadScriptsScriptsGetParams,) => {
+export const getGetScriptsScriptsGetUrl = (params?: GetScriptsScriptsGetParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
@@ -128,9 +128,9 @@ export const getReadScriptsScriptsGetUrl = (params?: ReadScriptsScriptsGetParams
   return normalizedParams.size ? `/scripts/?${normalizedParams.toString()}` : `/scripts/`
 }
 
-export const readScriptsScriptsGet = async (params?: ReadScriptsScriptsGetParams, options?: RequestInit): Promise<readScriptsScriptsGetResponse> => {
+export const getScriptsScriptsGet = async (params?: GetScriptsScriptsGetParams, options?: RequestInit): Promise<getScriptsScriptsGetResponse> => {
   
-  const res = await fetch(getReadScriptsScriptsGetUrl(params),
+  const res = await fetch(getGetScriptsScriptsGetUrl(params),
   {      
     ...options,
     method: 'GET'
@@ -146,67 +146,171 @@ export const readScriptsScriptsGet = async (params?: ReadScriptsScriptsGetParams
 
 
 
-export const getReadScriptsScriptsGetQueryKey = (params?: ReadScriptsScriptsGetParams,) => {
+export const getGetScriptsScriptsGetQueryKey = (params?: GetScriptsScriptsGetParams,) => {
     return [`/scripts/`, ...(params ? [params]: [])] as const;
     }
 
     
-export const getReadScriptsScriptsGetQueryOptions = <TData = Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError = HTTPValidationError>(params?: ReadScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+export const getGetScriptsScriptsGetQueryOptions = <TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
 ) => {
 
 const {query: queryOptions, fetch: fetchOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getReadScriptsScriptsGetQueryKey(params);
+  const queryKey =  queryOptions?.queryKey ?? getGetScriptsScriptsGetQueryKey(params);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof readScriptsScriptsGet>>> = ({ signal }) => readScriptsScriptsGet(params, { signal, ...fetchOptions });
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getScriptsScriptsGet>>> = ({ signal }) => getScriptsScriptsGet(params, { signal, ...fetchOptions });
 
       
 
       
 
-   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData> & { queryKey: QueryKey }
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData> & { queryKey: QueryKey }
 }
 
-export type ReadScriptsScriptsGetQueryResult = NonNullable<Awaited<ReturnType<typeof readScriptsScriptsGet>>>
-export type ReadScriptsScriptsGetQueryError = HTTPValidationError
+export type GetScriptsScriptsGetQueryResult = NonNullable<Awaited<ReturnType<typeof getScriptsScriptsGet>>>
+export type GetScriptsScriptsGetQueryError = HTTPValidationError
 
 
-export function useReadScriptsScriptsGet<TData = Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError = HTTPValidationError>(
- params: undefined |  ReadScriptsScriptsGetParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData>> & Pick<
+export function useGetScriptsScriptsGet<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params: undefined |  GetScriptsScriptsGetParams, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof readScriptsScriptsGet>>,
+          Awaited<ReturnType<typeof getScriptsScriptsGet>>,
           TError,
           TData
         > , 'initialData'
       >, fetch?: RequestInit}
 
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useReadScriptsScriptsGet<TData = Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError = HTTPValidationError>(
- params?: ReadScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData>> & Pick<
+export function useGetScriptsScriptsGet<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof readScriptsScriptsGet>>,
+          Awaited<ReturnType<typeof getScriptsScriptsGet>>,
           TError,
           TData
         > , 'initialData'
       >, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
-export function useReadScriptsScriptsGet<TData = Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError = HTTPValidationError>(
- params?: ReadScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+export function useGetScriptsScriptsGet<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
 /**
- * @summary Read Scripts
+ * @summary Get Scripts
  */
 
-export function useReadScriptsScriptsGet<TData = Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError = HTTPValidationError>(
- params?: ReadScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+export function useGetScriptsScriptsGet<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
 
   ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
-  const queryOptions = getReadScriptsScriptsGetQueryOptions(params,options)
+  const queryOptions = getGetScriptsScriptsGetQueryOptions(params,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * @summary Fetch Script
+ */
+export type fetchScriptScriptsScriptIdGetResponse = {
+  data: ScriptPublic;
+  status: number;
+}
+
+export const getFetchScriptScriptsScriptIdGetUrl = (scriptId: string,) => {
+
+
+  return `/scripts/${scriptId}`
+}
+
+export const fetchScriptScriptsScriptIdGet = async (scriptId: string, options?: RequestInit): Promise<fetchScriptScriptsScriptIdGetResponse> => {
+  
+  const res = await fetch(getFetchScriptScriptsScriptIdGetUrl(scriptId),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
+
+
+export const getFetchScriptScriptsScriptIdGetQueryKey = (scriptId: string,) => {
+    return [`/scripts/${scriptId}`] as const;
+    }
+
+    
+export const getFetchScriptScriptsScriptIdGetQueryOptions = <TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(scriptId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+) => {
+
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getFetchScriptScriptsScriptIdGetQueryKey(scriptId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>> = ({ signal }) => fetchScriptScriptsScriptIdGet(scriptId, { signal, ...fetchOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(scriptId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type FetchScriptScriptsScriptIdGetQueryResult = NonNullable<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>>
+export type FetchScriptScriptsScriptIdGetQueryError = HTTPValidationError
+
+
+export function useFetchScriptScriptsScriptIdGet<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, fetch?: RequestInit}
+
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useFetchScriptScriptsScriptIdGet<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useFetchScriptScriptsScriptIdGet<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
+/**
+ * @summary Fetch Script
+ */
+
+export function useFetchScriptScriptsScriptIdGet<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getFetchScriptScriptsScriptIdGetQueryOptions(scriptId,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 
@@ -294,6 +398,79 @@ export const useUpdateScriptScriptsScriptIdPut = <TError = HTTPValidationError,
     }
     
 /**
+ * @summary Delete Script
+ */
+export type deleteScriptScriptsScriptIdDeleteResponse = {
+  data: unknown;
+  status: number;
+}
+
+export const getDeleteScriptScriptsScriptIdDeleteUrl = (scriptId: string,) => {
+
+
+  return `/scripts/${scriptId}`
+}
+
+export const deleteScriptScriptsScriptIdDelete = async (scriptId: string, options?: RequestInit): Promise<deleteScriptScriptsScriptIdDeleteResponse> => {
+  
+  const res = await fetch(getDeleteScriptScriptsScriptIdDeleteUrl(scriptId),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
+
+
+
+export const getDeleteScriptScriptsScriptIdDeleteMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>, TError,{scriptId: string}, TContext>, fetch?: RequestInit}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>, TError,{scriptId: string}, TContext> => {
+const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>, {scriptId: string}> = (props) => {
+          const {scriptId} = props ?? {};
+
+          return  deleteScriptScriptsScriptIdDelete(scriptId,fetchOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteScriptScriptsScriptIdDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>>
+    
+    export type DeleteScriptScriptsScriptIdDeleteMutationError = HTTPValidationError
+
+    /**
+ * @summary Delete Script
+ */
+export const useDeleteScriptScriptsScriptIdDelete = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>, TError,{scriptId: string}, TContext>, fetch?: RequestInit}
+): UseMutationResult<
+        Awaited<ReturnType<typeof deleteScriptScriptsScriptIdDelete>>,
+        TError,
+        {scriptId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteScriptScriptsScriptIdDeleteMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    
+/**
  * @summary Create Timer
  */
 export type createTimerTimersPostResponse = {
@@ -368,6 +545,110 @@ export const useCreateTimerTimersPost = <TError = HTTPValidationError,
     }
     
 /**
+ * @summary Read Timer
+ */
+export type readTimerTimersTimerIdGetResponse = {
+  data: TimerPublic;
+  status: number;
+}
+
+export const getReadTimerTimersTimerIdGetUrl = (timerId: string,) => {
+
+
+  return `/timers/${timerId}`
+}
+
+export const readTimerTimersTimerIdGet = async (timerId: string, options?: RequestInit): Promise<readTimerTimersTimerIdGetResponse> => {
+  
+  const res = await fetch(getReadTimerTimersTimerIdGetUrl(timerId),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
+
+
+export const getReadTimerTimersTimerIdGetQueryKey = (timerId: string,) => {
+    return [`/timers/${timerId}`] as const;
+    }
+
+    
+export const getReadTimerTimersTimerIdGetQueryOptions = <TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(timerId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+) => {
+
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getReadTimerTimersTimerIdGetQueryKey(timerId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>> = ({ signal }) => readTimerTimersTimerIdGet(timerId, { signal, ...fetchOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(timerId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ReadTimerTimersTimerIdGetQueryResult = NonNullable<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>>
+export type ReadTimerTimersTimerIdGetQueryError = HTTPValidationError
+
+
+export function useReadTimerTimersTimerIdGet<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, fetch?: RequestInit}
+
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useReadTimerTimersTimerIdGet<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>,
+          TError,
+          TData
+        > , 'initialData'
+      >, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useReadTimerTimersTimerIdGet<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey }
+/**
+ * @summary Read Timer
+ */
+
+export function useReadTimerTimersTimerIdGet<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getReadTimerTimersTimerIdGetQueryOptions(timerId,options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * @summary Update Timer
  */
 export type updateTimerTimersTimerIdPutResponse = {
@@ -438,6 +719,79 @@ export const useUpdateTimerTimersTimerIdPut = <TError = HTTPValidationError,
       > => {
 
       const mutationOptions = getUpdateTimerTimersTimerIdPutMutationOptions(options);
+
+      return useMutation(mutationOptions);
+    }
+    
+/**
+ * @summary Delete Timer
+ */
+export type deleteTimerTimersTimerIdDeleteResponse = {
+  data: unknown;
+  status: number;
+}
+
+export const getDeleteTimerTimersTimerIdDeleteUrl = (timerId: string,) => {
+
+
+  return `/timers/${timerId}`
+}
+
+export const deleteTimerTimersTimerIdDelete = async (timerId: string, options?: RequestInit): Promise<deleteTimerTimersTimerIdDeleteResponse> => {
+  
+  const res = await fetch(getDeleteTimerTimersTimerIdDeleteUrl(timerId),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+
+  )
+  const data = await res.json()
+
+  return { status: res.status, data }
+}
+
+
+
+
+export const getDeleteTimerTimersTimerIdDeleteMutationOptions = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>, TError,{timerId: string}, TContext>, fetch?: RequestInit}
+): UseMutationOptions<Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>, TError,{timerId: string}, TContext> => {
+const {mutation: mutationOptions, fetch: fetchOptions} = options ?? {};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>, {timerId: string}> = (props) => {
+          const {timerId} = props ?? {};
+
+          return  deleteTimerTimersTimerIdDelete(timerId,fetchOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DeleteTimerTimersTimerIdDeleteMutationResult = NonNullable<Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>>
+    
+    export type DeleteTimerTimersTimerIdDeleteMutationError = HTTPValidationError
+
+    /**
+ * @summary Delete Timer
+ */
+export const useDeleteTimerTimersTimerIdDelete = <TError = HTTPValidationError,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>, TError,{timerId: string}, TContext>, fetch?: RequestInit}
+): UseMutationResult<
+        Awaited<ReturnType<typeof deleteTimerTimersTimerIdDelete>>,
+        TError,
+        {timerId: string},
+        TContext
+      > => {
+
+      const mutationOptions = getDeleteTimerTimersTimerIdDeleteMutationOptions(options);
 
       return useMutation(mutationOptions);
     }
