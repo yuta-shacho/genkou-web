@@ -1,1 +1,1 @@
-export * from './script-editor'
+export { ScriptEditorContainer as ScriptEditor, type ScriptEditorContainerProps as ScriptEditorProps } from './container'

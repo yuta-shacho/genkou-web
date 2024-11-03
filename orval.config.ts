@@ -10,6 +10,12 @@ export default defineConfig({
       clean: true,
       client: 'react-query',
       httpClient: 'fetch',
+      override: {
+        query: {
+          useSuspenseQuery: true,
+          version: 5,
+        },
+      },
     },
   },
 })

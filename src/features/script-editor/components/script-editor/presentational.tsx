@@ -1,4 +1,5 @@
 import type { Mode } from '@/features/script-editor/types'
+import type { Script } from '@/shared/models/script'
 import { ModeSelector } from '@/features/script-editor/components/mode-selector'
 import { EditableText } from '@/shared/components/editable-text'
 import { Save } from '@mui/icons-material'
@@ -8,11 +9,10 @@ import { type FC, lazy, Suspense, useState } from 'react'
 const Markdown = lazy(() => import('@/features/markdown/components/markdown').then(module => ({ default: module.Markdown })))
 const Editor = lazy(() => import('@/features/editor/component/Editor'))
 
-export interface ScriptEditorProps {
-}
+export type ScriptEditorPresentationalProps = Script
 
-export const ScriptEditor: FC<ScriptEditorProps> = () => {
-  const [markdown, setMarkdown] = useState<string>('')
+export const ScriptEditorPresentational: FC<ScriptEditorPresentationalProps> = ({ content }) => {
+  const [markdown, setMarkdown] = useState<string>(content)
   const [mode, setMode] = useState<Mode>('edit')
   return (
     <Box sx={{

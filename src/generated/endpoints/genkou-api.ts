@@ -6,7 +6,8 @@
  */
 import {
   useMutation,
-  useQuery
+  useQuery,
+  useSuspenseQuery
 } from '@tanstack/react-query'
 import type {
   DefinedInitialDataOptions,
@@ -18,7 +19,9 @@ import type {
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
-  UseQueryResult
+  UseQueryResult,
+  UseSuspenseQueryOptions,
+  UseSuspenseQueryResult
 } from '@tanstack/react-query'
 import type {
   GetScriptsScriptsGetParams,
@@ -217,6 +220,60 @@ export function useGetScriptsScriptsGet<TData = Awaited<ReturnType<typeof getScr
 
 
 
+export const getGetScriptsScriptsGetSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+) => {
+
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetScriptsScriptsGetQueryKey(params);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getScriptsScriptsGet>>> = ({ signal }) => getScriptsScriptsGet(params, { signal, ...fetchOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetScriptsScriptsGetSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof getScriptsScriptsGet>>>
+export type GetScriptsScriptsGetSuspenseQueryError = HTTPValidationError
+
+
+export function useGetScriptsScriptsGetSuspense<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params: undefined |  GetScriptsScriptsGetParams, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetScriptsScriptsGetSuspense<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useGetScriptsScriptsGetSuspense<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+/**
+ * @summary Get Scripts
+ */
+
+export function useGetScriptsScriptsGetSuspense<TData = Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError = HTTPValidationError>(
+ params?: GetScriptsScriptsGetParams, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof getScriptsScriptsGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetScriptsScriptsGetSuspenseQueryOptions(params,options)
+
+  const query = useSuspenseQuery(queryOptions) as  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
 
 /**
  * @summary Fetch Script
@@ -313,6 +370,60 @@ export function useFetchScriptScriptsScriptIdGet<TData = Awaited<ReturnType<type
   const queryOptions = getFetchScriptScriptsScriptIdGetQueryOptions(scriptId,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const getFetchScriptScriptsScriptIdGetSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(scriptId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+) => {
+
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getFetchScriptScriptsScriptIdGetQueryKey(scriptId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>> = ({ signal }) => fetchScriptScriptsScriptIdGet(scriptId, { signal, ...fetchOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(scriptId), ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type FetchScriptScriptsScriptIdGetSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>>
+export type FetchScriptScriptsScriptIdGetSuspenseQueryError = HTTPValidationError
+
+
+export function useFetchScriptScriptsScriptIdGetSuspense<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useFetchScriptScriptsScriptIdGetSuspense<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useFetchScriptScriptsScriptIdGetSuspense<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+/**
+ * @summary Fetch Script
+ */
+
+export function useFetchScriptScriptsScriptIdGetSuspense<TData = Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError = HTTPValidationError>(
+ scriptId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof fetchScriptScriptsScriptIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getFetchScriptScriptsScriptIdGetSuspenseQueryOptions(scriptId,options)
+
+  const query = useSuspenseQuery(queryOptions) as  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryOptions.queryKey ;
 
@@ -639,6 +750,60 @@ export function useReadTimerTimersTimerIdGet<TData = Awaited<ReturnType<typeof r
   const queryOptions = getReadTimerTimersTimerIdGetQueryOptions(timerId,options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+export const getReadTimerTimersTimerIdGetSuspenseQueryOptions = <TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(timerId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+) => {
+
+const {query: queryOptions, fetch: fetchOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getReadTimerTimersTimerIdGetQueryKey(timerId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>> = ({ signal }) => readTimerTimersTimerIdGet(timerId, { signal, ...fetchOptions });
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(timerId), ...queryOptions} as UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ReadTimerTimersTimerIdGetSuspenseQueryResult = NonNullable<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>>
+export type ReadTimerTimersTimerIdGetSuspenseQueryError = HTTPValidationError
+
+
+export function useReadTimerTimersTimerIdGetSuspense<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options: { query:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useReadTimerTimersTimerIdGetSuspense<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+export function useReadTimerTimersTimerIdGetSuspense<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey }
+/**
+ * @summary Read Timer
+ */
+
+export function useReadTimerTimersTimerIdGetSuspense<TData = Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError = HTTPValidationError>(
+ timerId: string, options?: { query?:Partial<UseSuspenseQueryOptions<Awaited<ReturnType<typeof readTimerTimersTimerIdGet>>, TError, TData>>, fetch?: RequestInit}
+
+  ):  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getReadTimerTimersTimerIdGetSuspenseQueryOptions(timerId,options)
+
+  const query = useSuspenseQuery(queryOptions) as  UseSuspenseQueryResult<TData, TError> & { queryKey: QueryKey };
 
   query.queryKey = queryOptions.queryKey ;
 
