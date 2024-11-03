@@ -1,6 +1,7 @@
 import type { Mode } from '@/features/script-editor/types'
 import type { Script } from '@/shared/models/script'
 import { ModeSelector } from '@/features/script-editor/components/mode-selector'
+import { useUpdateScriptScriptsScriptIdPut } from '@/shared/api'
 import { EditableText } from '@/shared/components/editable-text'
 import { Save } from '@mui/icons-material'
 import { Box, Button, Grid2 as Grid, Toolbar } from '@mui/material'
@@ -11,9 +12,21 @@ const Editor = lazy(() => import('@/features/editor/component/Editor'))
 
 export type ScriptEditorPresentationalProps = Script
 
-export const ScriptEditorPresentational: FC<ScriptEditorPresentationalProps> = ({ content }) => {
+export const ScriptEditorPresentational: FC<ScriptEditorPresentationalProps> = ({ id, content }) => {
   const [markdown, setMarkdown] = useState<string>(content)
   const [mode, setMode] = useState<Mode>('edit')
+
+  const mutation = useUpdateScriptScriptsScriptIdPut()
+
+  const handleClickSaveButton = () => {
+    mutation.mutate({
+      scriptId: id,
+      data: {
+        content: markdown,
+      },
+    })
+  }
+
   return (
     <Box sx={{
       display: 'flex',
@@ -35,11 +48,25 @@ export const ScriptEditorPresentational: FC<ScriptEditorPresentationalProps> = (
           </Grid>
           <Grid container size="grow" sx={{ placeContent: 'center' }}>
             <Box width="100%" maxWidth="80%">
-              <EditableText initial="TITLE" save={() => { }} />
+              <EditableText
+                initial="TITLE"
+                save={(title) => {
+                  mutation.mutate({
+                    scriptId: id,
+                    data: {
+                      title,
+                    },
+                  })
+                }}
+              />
             </Box>
           </Grid>
           <Grid>
-            <Button variant="contained" sx={{ display: 'flex', gap: 0.5 }}>
+            <Button
+              onClick={handleClickSaveButton}
+              variant="contained"
+              sx={{ display: 'flex', gap: 0.5 }}
+            >
               <Save fontSize="small" />
               保存
             </Button>
