@@ -1,19 +1,18 @@
 import { Box } from '@mui/material'
 import { useEffect, useState } from 'react'
-import SectionInputField from './SectionInputField'
 import SectionButton from './SectionButton'
 import SectionCountdown from './SectionCountdown'
+import SectionInputField from './SectionInputField'
 
 interface TimerSectionProps {
-    totalSeconds: number,
-    setTotalSeconds: React.Dispatch<React.SetStateAction<number>>,
-  }
+  totalSeconds: number
+  setTotalSeconds: React.Dispatch<React.SetStateAction<number>>
+}
 
-const TimerSection = ({totalSeconds,setTotalSeconds}: TimerSectionProps) => {
-
-    const [minutes, setMinutes] = useState<string>('0')
+function TimerSection({ totalSeconds, setTotalSeconds }: TimerSectionProps) {
+  const [minutes, setMinutes] = useState<string>('0')
   const [seconds, setSeconds] = useState<string>('0')
-  const [sectionTotalSeconds,setSectionTotalSeconds] = useState<number>(0)
+  const [sectionTotalSeconds, setSectionTotalSeconds] = useState<number>(0)
   const [isActive, setIsActive] = useState<boolean>(false)
   const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -43,20 +42,19 @@ const TimerSection = ({totalSeconds,setTotalSeconds}: TimerSectionProps) => {
   const handleSet = () => {
     const totalSec = Number.parseInt(minutes) * 60 + Number.parseInt(seconds)
     if (!Number.isNaN(totalSec) && totalSec >= 0) {
-        if (totalSeconds !== 1 && totalSeconds >= totalSec) {
-            setSectionTotalSeconds(totalSec)
-            setErrorMessage(null)
-            setTotalSeconds(totalSeconds - totalSec)
-        }
-        else {
-            setErrorMessage('Please set Titletimer!')
-        }
-      
+      if (totalSeconds !== 1 && totalSeconds >= totalSec) {
+        setSectionTotalSeconds(totalSec)
+        setErrorMessage(null)
+        setTotalSeconds(totalSeconds - totalSec)
+      }
+      else {
+        setErrorMessage('Please set Titletimer!')
+      }
     }
     else {
       setErrorMessage('Invalid time input!')
     }
-   }
+  }
 
   const handleStart = () => {
     setIsActive(true)
@@ -74,8 +72,6 @@ const TimerSection = ({totalSeconds,setTotalSeconds}: TimerSectionProps) => {
   const handleSecondsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSeconds(e.target.value)
   }
-  
-    
 
   return (
     <Box sx={{ textAlign: 'center', marginTop: '20px' }}>
@@ -100,8 +96,6 @@ const TimerSection = ({totalSeconds,setTotalSeconds}: TimerSectionProps) => {
       />
     </Box>
   )
-
-  
 }
 
 export default TimerSection

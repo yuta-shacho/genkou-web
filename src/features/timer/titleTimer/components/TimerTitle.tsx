@@ -2,14 +2,14 @@ import { Box } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Button from './Button'
 import Countdown from './Countdown'
-import InputField from './inputField'
+import InputField from './InputField'
 
 interface TimerTitleProps {
-  totalSeconds: number,
-  setTotalSeconds: React.Dispatch<React.SetStateAction<number>>,
+  totalSeconds: number
+  setTotalSeconds: React.Dispatch<React.SetStateAction<number>>
 }
 
-function TimerTitle({totalSeconds,setTotalSeconds}: TimerTitleProps) {
+function TimerTitle({ totalSeconds, setTotalSeconds }: TimerTitleProps) {
   const [minutes, setMinutes] = useState<string>('0')
   const [seconds, setSeconds] = useState<string>('0')
   const [isActive, setIsActive] = useState<boolean>(false)
@@ -38,8 +38,8 @@ function TimerTitle({totalSeconds,setTotalSeconds}: TimerTitleProps) {
     setIsActive(!isActive)
   }
 
- const handleSet = () => {
-  const totalSec = Number.parseInt(minutes) * 60 + Number.parseInt(seconds)
+  const handleSet = () => {
+    const totalSec = Number.parseInt(minutes) * 60 + Number.parseInt(seconds)
     if (!Number.isNaN(totalSec) && totalSec >= 0) {
       setTotalSeconds(totalSec)
       setErrorMessage(null)
@@ -47,10 +47,10 @@ function TimerTitle({totalSeconds,setTotalSeconds}: TimerTitleProps) {
     else {
       setErrorMessage('Invalid time input!')
     }
- }
+  }
 
   const handleStart = () => {
-      setIsActive(true)
+    setIsActive(true)
   }
 
   const handleReset = () => {

@@ -1,7 +1,7 @@
 import PauseCircleIcon from '@mui/icons-material/PauseCircle'
 import PlayCircleIcon from '@mui/icons-material/PlayCircle'
 import RestoreIcon from '@mui/icons-material/Restore'
-import SettingsIcon from '@mui/icons-material/Settings';
+import SettingsIcon from '@mui/icons-material/Settings'
 import { IconButton } from '@mui/material'
 
 interface SectionButtonProps {
@@ -17,8 +17,8 @@ function SectionButton({ isActive, toggleActive, handleStart, handleReset, secti
   return (
     <>
       <IconButton onClick={handleSet}>
-      <SettingsIcon/>
-    </IconButton>
+        <SettingsIcon />
+      </IconButton>
       <IconButton onClick={isActive ? toggleActive : handleStart}>
         {isActive ? <PauseCircleIcon color="error" /> : <PlayCircleIcon color="primary" />}
       </IconButton>
