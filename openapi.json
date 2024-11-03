@@ -43,8 +43,8 @@
         }
       },
       "get": {
-        "summary": "Read Scripts",
-        "operationId": "read_scripts_scripts__get",
+        "summary": "Get Scripts",
+        "operationId": "get_scripts_scripts__get",
         "parameters": [
           {
             "name": "offset",
@@ -78,7 +78,7 @@
                   "items": {
                     "$ref": "#/components/schemas/ScriptPublic"
                   },
-                  "title": "Response Read Scripts Scripts  Get"
+                  "title": "Response Get Scripts Scripts  Get"
                 }
               }
             }
@@ -97,6 +97,44 @@
       }
     },
     "/scripts/{script_id}": {
+      "get": {
+        "summary": "Fetch Script",
+        "operationId": "fetch_script_scripts__script_id__get",
+        "parameters": [
+          {
+            "name": "script_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Script Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScriptPublic"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Update Script",
         "operationId": "update_script_scripts__script_id__put",
@@ -130,6 +168,42 @@
                 "schema": {
                   "$ref": "#/components/schemas/ScriptPublic"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Script",
+        "operationId": "delete_script_scripts__script_id__delete",
+        "parameters": [
+          {
+            "name": "script_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Script Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
@@ -185,6 +259,43 @@
       }
     },
     "/timers/{timer_id}": {
+      "get": {
+        "summary": "Read Timer",
+        "operationId": "read_timer_timers__timer_id__get",
+        "parameters": [
+          {
+            "name": "timer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Timer Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimerPublic"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Update Timer",
         "operationId": "update_timer_timers__timer_id__put",
@@ -217,6 +328,41 @@
                 "schema": {
                   "$ref": "#/components/schemas/TimerPublic"
                 }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Timer",
+        "operationId": "delete_timer_timers__timer_id__delete",
+        "parameters": [
+          {
+            "name": "timer_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Timer Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           },
