@@ -8,7 +8,7 @@ export interface Script {
   title: string
   content: string
   timer: Duration | null
-  timerId: string
+  timerId: string | null
   createdAt: TZDate
   updatedAt: TZDate
 }
@@ -19,7 +19,7 @@ export function rawScriptToScript(raw: ScriptPublic): Script {
     title: raw.title,
     content: raw.content,
     timer: typeof raw.timer === 'number' ? secondsToDuration(raw.timer) : null,
-    timerId: 'dummy', // TODO: バックエンドのAPIの更新を待機
+    timerId: raw.timer_id ?? null,
     createdAt: new TZDate(raw.created_at, 'Asia/Tokyo'),
     updatedAt: new TZDate(raw.updated_at, 'Asia/Tokyo'),
   }
