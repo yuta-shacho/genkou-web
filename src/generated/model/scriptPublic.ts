@@ -5,12 +5,14 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ScriptPublicTimer } from './scriptPublicTimer';
+import type { ScriptPublicTimerId } from './scriptPublicTimerId';
 
 export interface ScriptPublic {
   content: string;
   created_at: string;
   id: string;
   timer?: ScriptPublicTimer;
+  timer_id?: ScriptPublicTimerId;
   title: string;
   updated_at: string;
 }

@@ -5,9 +5,11 @@
  * OpenAPI spec version: 0.1.0
  */
 import type { ScriptCreateTimer } from './scriptCreateTimer';
+import type { ScriptCreateTimerId } from './scriptCreateTimerId';
 
 export interface ScriptCreate {
   content: string;
   timer?: ScriptCreateTimer;
+  timer_id?: ScriptCreateTimerId;
   title: string;
 }

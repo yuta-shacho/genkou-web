@@ -415,6 +415,17 @@
               }
             ],
             "title": "Timer"
+          },
+          "timer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timer Id"
           }
         },
         "type": "object",
@@ -441,6 +452,17 @@
               }
             ],
             "title": "Timer"
+          },
+          "timer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timer Id"
           },
           "id": {
             "type": "string",
@@ -496,6 +518,17 @@
               }
             ],
             "title": "Timer"
+          },
+          "timer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timer Id"
           }
         },
         "type": "object",
