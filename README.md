@@ -3,7 +3,7 @@
 https://qiita.com/yuta-shacho/items/9248e36866742b512d47
 
 # 概要
-技育CAMPハッカソンvol.17で作成した**『限稿』** フロントエンドソースコード
+技育CAMPハッカソンvol.17で作成した **『限稿』** フロントエンドソースコード
 
 https://x.com/geek_pjt/status/1852988176631013735
 
